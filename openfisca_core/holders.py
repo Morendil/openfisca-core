@@ -121,17 +121,17 @@ class Holder(object):
         # Check that the requested period matches definition_period
         if column.definition_period != ETERNITY:
             if column.definition_period == MONTH and period.unit != periods.MONTH:
-                raise ValueError('Unable to compute variable {} for period {} : {} must be computed for a whole month. This behavior can be overridden, please refer to the documentation.'.format(
+                raise ValueError('Unable to compute variable {} for period {} : {} must be computed for a whole month. You can use the option DIVIDE or use period.this_month'.format(
                     column.name,
                     period,
                     column.name))
             if column.definition_period == YEAR and period.unit != periods.YEAR:
-                raise ValueError('Unable to compute variable {} for period {} : {} must be computed for a whole year. This behavior can be overridden, please refer to the documentation.'.format(
+                raise ValueError('Unable to compute variable {} for period {} : {} must be computed for a whole year. You can use the option ADD.'.format(
                     column.name,
                     period,
                     column.name))
             if period.size != 1:
-                raise ValueError('Unable to compute variable {} for period {} : {} must be computed for a whole {}. This behavior can be overridden, please refer to the documentation.'.format(
+                raise ValueError('Unable to compute variable {} for period {} : {} must be computed for a whole {}. You can use the option ADD.'.format(
                     column.name,
                     period,
                     column.name,
@@ -157,7 +157,7 @@ class Holder(object):
     def compute_add(self, period = None, **parameters):
         # Check that the requested period matches definition_period
         if self.column.definition_period == YEAR and period.unit == periods.MONTH:
-            raise ValueError('Unable to compute variable {} for period {} : {} can only be computed on year-long periods. This behavior can be overridden, please refer to the documentation.'.format(
+            raise ValueError('Unable to compute variable {} for period {} : {} can only be computed on year-long periods.'.format(
                 self.column.name,
                 period,
                 self.column.name))
