@@ -3,6 +3,7 @@
 import numpy as np
 
 from . import periods
+from periods import YEAR
 
 
 def compare_periods(x, y):
@@ -26,7 +27,7 @@ def requested_period_added_value(formula, simulation, period, *extra_params):
     column = holder.column
     period_size = period.size
     period_unit = period.unit
-    if holder._array_by_period is not None and (period_size > 1 or period_unit == u'year'):
+    if holder._array_by_period is not None and (period_size > 1 or period_unit == YEAR):
         after_instant = period.start.offset(period_size, period_unit)
         if period_size > 1:
             array = formula.zeros(dtype = column.dtype)
@@ -40,7 +41,7 @@ def requested_period_added_value(formula, simulation, period, *extra_params):
                 sub_period = sub_period.offset(1)
             if array is not None:
                 return array
-        if period_unit == u'year':
+        if period_unit == YEAR:
             array = formula.zeros(dtype = column.dtype)
             month = period.start.period(u'month')
             while month.start < after_instant:

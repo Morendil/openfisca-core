@@ -55,7 +55,7 @@ class AbstractScenario(object):
         if test_case is None:
             if self.input_variables is not None:
                 # Note: For set_input to work, handle days, before months, before years => use sorted().
-                for variable_name, array_by_period in sorted(self.input_variables.iteritems(), cmp = compare_periods):
+                for variable_name, array_by_period in sorted(self.input_variables.iteritems()):
                     holder = simulation.get_or_new_holder(variable_name)
                     entity = holder.entity
                     for period, array in array_by_period.iteritems():

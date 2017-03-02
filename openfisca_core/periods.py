@@ -904,7 +904,7 @@ def compare_period_size(a, b):
     if (unit_a is ETERNITY) or (unit_b is ETERNITY):
         raise ValueError('ETERNITY cannot be compared to another period.')
 
-    if unit_a is not unit_b:
+    if unit_a != unit_b:
         unit_weights = {
             u'day': 1,
             u'month': 2,
