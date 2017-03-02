@@ -8,9 +8,6 @@
 * Remove `*_add_divide`, `last_duration_last_value`, `variables_name_to_skip`, `use_set_input_hooks`
   - Were not used
 * Cache only results corresponding to the variable `definition_period` attribute
-* Use `calculate_output` in test runner
-* Add hook `calculate_output_first_month`
-  - This is needed to solve period mismatch in test runner
 * Remove the default periods order
   - A specific order must be defined for each usage
 * `set_input` is called only once when parallel axes are used
