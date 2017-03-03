@@ -6,13 +6,6 @@ from . import periods
 from periods import YEAR
 
 
-def compare_periods(x, y):
-    a = x[0]
-    b = y[0]
-
-    return periods.compare_period_start(a, b) or periods.compare_period_size(a, b)
-
-
 def permanent_default_value(formula, simulation, period, *extra_params):
     if formula.function is not None:
         return formula.exec_function(simulation, period, *extra_params)
@@ -76,6 +69,15 @@ def requested_period_default_value_neutralized(formula, simulation, period, *ext
 def requested_period_last_value(formula, simulation, period, *extra_params, **kwargs):
     # This formula is used for variables that are constants between events and period size independent.
     # It returns the latest known value for the requested period.
+
+
+    def compare_start_instant(x, y):
+        a = x[0]  # x = (period, array)
+        b = y[0]
+
+        return periods.compare_period_start(a, b)
+
+
     accept_future_value = kwargs.pop('accept_future_value', False)
     holder = formula.holder
     if holder._array_by_period is not None:
