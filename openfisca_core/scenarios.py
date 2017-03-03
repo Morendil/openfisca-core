@@ -230,7 +230,7 @@ class AbstractScenario(object):
                                 column = tbs.column_by_name[axis_name]
                                 array = np.empty(axis_entity_count, dtype = column.dtype)
                                 array.fill(column.default)
-                            array[axis['index']:: axis_entity_count] = axis['min'] \
+                            array[axis['index']:: axis_entity_step_size] = axis['min'] \
                                 + mesh.reshape(steps_count) * (axis['max'] - axis['min']) / (axis_count - 1)
                             cache_buffer[axis_name][axis_period] = array
 
