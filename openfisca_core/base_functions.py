@@ -70,18 +70,16 @@ def requested_period_last_value(formula, simulation, period, *extra_params, **kw
     # This formula is used for variables that are constants between events and period size independent.
     # It returns the latest known value for the requested period.
 
-
     def compare_start_instant(x, y):
         a = x[0]  # x = (period, array)
         b = y[0]
 
         return periods.compare_period_start(a, b)
 
-
     accept_future_value = kwargs.pop('accept_future_value', False)
     holder = formula.holder
     if holder._array_by_period is not None:
-        known_values = sorted(holder._array_by_period.iteritems(), cmp = compare_periods, reverse = True)
+        known_values = sorted(holder._array_by_period.iteritems(), cmp = compare_start_instant, reverse = True)
         for last_period, last_result in known_values:
             if last_period.start <= period.start and (formula.function is None or last_period.stop >= period.stop):
                 if type(last_result) == np.ndarray and not extra_params:
